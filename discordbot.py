@@ -2,14 +2,15 @@ from discord.ext import commands, tasks # Bot Commands Frameworkをインポー�
 import traceback # エラー表示のためにインポート
 import os
 import discord
+from  datetime import datetime
 
 TOKEN = os.environ['DISCORD_BOT_TOKEN']
-prefix = 'e!'
+prefix = 'o!'
 
 # 読み込むコグの名前を格納しておく。
 INITIAL_EXTENSIONS = [
     'cogs.eval',
-    'cogs.test'
+    'cogs.omikuji'
 ]
 
 # クラスの定義。ClientのサブクラスであるBotクラスを継承。
@@ -33,7 +34,7 @@ class MyBot(commands.Bot):
         print(self.user.id)  # ボットのID
         print(discord.__version__)  # discord.pyのバージョン
         print('----------------')
-        await self.change_presence(status=discord.Status.idle,activity=discord.Game(name=f'Test|Ping:{self.ws.latency * 1000:.0f}ms')) 
+        await self.change_presence(status=discord.Status.idle,activity=discord.Game(name=f'|Ping:{self.ws.latency * 1000:.0f}ms')) 
  
 class JapaneseHelpCommand(commands.DefaultHelpCommand):
     def __init__(self):
@@ -48,5 +49,5 @@ class JapaneseHelpCommand(commands.DefaultHelpCommand):
 
 #MyBotのインスタンス化及び起動処理。
 if __name__ == '__main__':
-    bot = MyBot(command_prefix='t!',help_command=JapaneseHelpCommand())
+    bot = MyBot(command_prefix='o!',help_command=JapaneseHelpCommand())
     bot.run(TOKEN)
